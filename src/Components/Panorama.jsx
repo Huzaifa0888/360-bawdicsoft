@@ -219,10 +219,18 @@ export const Panorama = ({}) => {
           <h1 className="text-white text-center">Click Me</h1>
         </div>
       )}
-
+      <div
+        className={`flex justify-center items-center h-screen  ${
+          !showCanvas ? "hidden" : "block"
+        }`}
+      >
+        <img src="/download.png" alt="Canvas" />
+      </div>
       <div
         ref={Canvas}
-        className="w-full h-screen overflow-y-hidden opacity-100 bg-transparent"
+        className={`w-full h-[100vh] overflow-hidden opacity-100 bg-transparent ${
+          showCanvas ? "hidden" : "flex"
+        }`}
       ></div>
 
       {/* {audio && (
