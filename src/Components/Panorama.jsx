@@ -11,7 +11,8 @@ export const Panorama = ({}) => {
   const [open, setOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [audio, setAudio] = useState(false);
-  const [hide, sethide] = useState(true);
+   const [hide, setHide] = useState(true);
+   const [showCanvas, setShowCanvas] = useState(false);
 
   const initializePANOLENS = async () => {
     const THREE = await import("three");
@@ -205,7 +206,7 @@ export const Panorama = ({}) => {
     }
   };
   function click() {
-    sethide(false);
+    setHide(false);
     handlePermissionRequest();
   }
   return (
