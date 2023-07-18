@@ -234,11 +234,12 @@ export const Panorama = ({}) => {
       ></div>
 
       {/* {audio && ( */}
-        <audio
-          src="/assets/audio.mp3"
-          className="w-0 h-0 hidden"
+        {/* <audio
+          src="/audio.mp3"
+        //   className="w-0 h-0"
           autoPlay
-        ></audio>
+        ></audio> */}
+        <audio src="/audio.mp3"></audio>
       {/* )} */}
       {/* {open && (
         <div className="fixed inset-0 flex items-center justify-center z-10">
