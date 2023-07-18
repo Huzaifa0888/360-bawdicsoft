@@ -34,9 +34,10 @@ export const Panorama = ({}) => {
     viewer.control[1] = true;
     viewer.controls[1] = true;
     viewer.controls[0] = false;
-    viewer.DeviceOrientationControls;
+    viewer.DeviceOrientationControls.enabled=true;
 
     const panorama1 = new PANOLENS.ImagePanorama("/assets/p1.jpg");
+    console.log("🚀 ~ file: Panorama.jsx:40 ~ initializePANOLENS ~ panorama1:", panorama1)
     const panorama2 = new PANOLENS.ImagePanorama("/assets/p2.jpg");
     const panorama3 = new PANOLENS.ImagePanorama("/assets/p3.jpg");
     const panorama4 = new PANOLENS.ImagePanorama("/assets/p4.jpg");
