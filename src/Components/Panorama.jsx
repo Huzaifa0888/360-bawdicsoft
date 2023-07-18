@@ -19,7 +19,7 @@ export const Panorama = ({}) => {
 
     const viewer = new PANOLENS.Viewer({
       container: Canvas.current,
-    //   autoRotate: false,
+      //   autoRotate: false,
       // autoRotateSpeed: 0.2,
       // autoRotateActivationDuration: 5000,
       // dwellTime: 1000,
@@ -152,33 +152,73 @@ export const Panorama = ({}) => {
   };
 
   useEffect(() => {
-    if (typeof window !== "undefined") initializePANOLENS();
-  }, [Canvas]);
+    if (typeof window !== "undefined") {
+      initializePANOLENS();
+    }
+  }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      const isPortrait = window.innerHeight > window.innerWidth;
+      console.log(
+        "🚀 ~ file: panorama.jsx:115 ~ handleResize ~ window.innerWidth:",
+        window.innerWidth
+      );
+      console.log(
+        "🚀 ~ file: panorama.jsx:115 ~ handleResize ~ window.innerHeight:",
+        window.innerHeight
+      );
+      setShowCanvas(isPortrait);
+    };
 
-  const [permissionGranted, setPermissionGranted] = useState(false);
+    // Attach event listener for window resize
+    window.addEventListener("resize", handleResize);
 
-  const handleDME = () => {
-    if (typeof DeviceMotionEvent?.requestPermission === "function") {
+    // Call the initial handleResize to set the initial value
+    handleResize();
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const handlePermissionRequest = () => {
+    if (
+      typeof DeviceMotionEvent !== "undefined" &&
+      typeof DeviceMotionEvent.requestPermission === "function"
+    ) {
       DeviceMotionEvent.requestPermission()
         .then((permissionState) => {
           if (permissionState === "granted") {
-            // User has granted permission
-            console.log("granted");
+            // Permission granted
+            console.log("Gyroscope access granted");
+            // Enable the DeviceOrientationControls here or perform other actions
+          } else {
+            // Permission denied
+            console.log("Gyroscope access denied");
+            // Handle the denial case
           }
         })
-        .catch(console.error);
+        .catch((error) => {
+          console.error("Error requesting gyroscope permission:", error);
+        });
     }
-    sethide(false);
   };
-
+  function click() {
+    sethide(false);
+    handlePermissionRequest();
+  }
   return (
     <>
       {hide && (
         <div
-          onClick={handleDME}
-          className="h-screen absolute z-50 w-full lg:hidden block"
-        ></div>
+          onClick={click}
+          className="h-screen absolute z-50 w-full bg-black lg:hidden flex justify-center items-center"
+        >
+          <h1 className="text-white text-center">Click Me</h1>
+        </div>
       )}
+
       <div
         ref={Canvas}
         className="w-full h-screen overflow-y-hidden opacity-100 bg-transparent"
