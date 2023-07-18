@@ -31,11 +31,11 @@ export const Panorama = ({}) => {
       viewer
     );
     viewer.control = viewer.DeviceOrientationControls;
-    // viewer.OrbitControls.enabled = false;
+    viewer.OrbitControls.enabled = false;
     // viewer.control[1] = true;
     viewer.controls[1] = true;
     viewer.controls[0] = false;
-    // viewer.DeviceOrientationControls.enabled = true;
+    viewer.DeviceOrientationControls.enabled = true;
 
     const panorama1 = new PANOLENS.ImagePanorama("/assets/p1.jpg");
     console.log(
