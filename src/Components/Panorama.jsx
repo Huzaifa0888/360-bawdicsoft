@@ -19,7 +19,7 @@ export const Panorama = ({}) => {
 
     const viewer = new PANOLENS.Viewer({
       container: Canvas.current,
-      autoRotate: false,
+    //   autoRotate: false,
       // autoRotateSpeed: 0.2,
       // autoRotateActivationDuration: 5000,
       // dwellTime: 1000,
@@ -30,14 +30,17 @@ export const Panorama = ({}) => {
       "🚀 ~ file: Panorama.jsx:29 ~ initializePANOLENS ~ viewer:",
       viewer
     );
-    viewer.control.enabled = false;
+    viewer.OrbitControls.enabled = false;
     // viewer.control[1] = true;
     // viewer.controls[1] = true;
     // viewer.controls[0] = false;
-    viewer.DeviceOrientationControls.enabled=true;
+    viewer.DeviceOrientationControls.enabled = true;
 
     const panorama1 = new PANOLENS.ImagePanorama("/assets/p1.jpg");
-    console.log("🚀 ~ file: Panorama.jsx:40 ~ initializePANOLENS ~ panorama1:", panorama1)
+    console.log(
+      "🚀 ~ file: Panorama.jsx:40 ~ initializePANOLENS ~ panorama1:",
+      panorama1
+    );
     const panorama2 = new PANOLENS.ImagePanorama("/assets/p2.jpg");
     const panorama3 = new PANOLENS.ImagePanorama("/assets/p3.jpg");
     const panorama4 = new PANOLENS.ImagePanorama("/assets/p4.jpg");
@@ -98,7 +101,7 @@ export const Panorama = ({}) => {
     hotspot3.addEventListener("click", () => {
       viewer.setPanorama(panorama4);
       // setAudio(true);
-    })
+    });
     hotspot4.addEventListener("click", () => {
       viewer.setPanorama(panorama5);
       // setAudio(true);
