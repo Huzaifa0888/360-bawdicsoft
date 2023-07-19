@@ -1,252 +1,265 @@
-    "use client";
+"use client";
 
-    import { useMemo, useRef, useState, useEffect } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 
-    // import VideoPopup from "./VideoPopup";
+// import VideoPopup from "./VideoPopup";
 import ReactAudioPlayer from "react-audio-player";
-    // import ReactPlayer from "react-player";
+// import ReactPlayer from "react-player";
 
-    export const Panorama = ({}) => {
-    const Canvas = useRef(null);
-    const [open, setOpen] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
-    const [audio, setAudio] = useState(false);
-    const [hide, setHide] = useState(true);
-    const [showCanvas, setShowCanvas] = useState(false);
-    const audioRef = useRef(null);
-    const [audioPlaying, setAudioPlaying] = useState(false);
+export const Panorama = ({}) => {
+  const Canvas = useRef(null);
+  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [audio, setAudio] = useState(false);
+  const [hide, setHide] = useState(true);
+  const [showCanvas, setShowCanvas] = useState(false);
+  const audioRef = useRef(null);
+  const [audioPlaying, setAudioPlaying] = useState(false);
 
-    const initializePANOLENS = async () => {
-        const THREE = await import("three");
-        const PANOLENS = await import("panolens");
+  const initializePANOLENS = async () => {
+    const THREE = await import("three");
+    const PANOLENS = await import("panolens");
 
-        const viewer = new PANOLENS.Viewer({
-        container: Canvas.current,
-        //   autoRotate: false,
-        // autoRotateSpeed: 0.2,
-        // autoRotateActivationDuration: 5000,
-        // dwellTime: 1000,
-        autoHideInfospot: false,
-        controlBar: false,
-        });
-        console.log(
-        "🚀 ~ file: Panorama.jsx:29 ~ initializePANOLENS ~ viewer:",
-        viewer
-        );
-        viewer.control = viewer.DeviceOrientationControls;
-        viewer.OrbitControls.enabled = false;
-        // viewer.control[1] = true;
-        viewer.controls[1] = true;
-        viewer.controls[0] = false;
-        viewer.DeviceOrientationControls.enabled = true;
+    const viewer = new PANOLENS.Viewer({
+      container: Canvas.current,
+      //   autoRotate: false,
+      // autoRotateSpeed: 0.2,
+      // autoRotateActivationDuration: 5000,
+      // dwellTime: 1000,
+      autoHideInfospot: false,
+      controlBar: false,
+    });
+    console.log(
+      "🚀 ~ file: Panorama.jsx:29 ~ initializePANOLENS ~ viewer:",
+      viewer
+    );
+    // viewer.control = viewer.DeviceOrientationControls;
+    // viewer.OrbitControls.enabled = false;
+    // // viewer.control[1] = true;
+    // viewer.controls[1] = true;
+    // viewer.controls[0] = false;
+    // viewer.DeviceOrientationControls.enabled = true;
 
-        const panorama1 = new PANOLENS.ImagePanorama("/assets/p1.jpg");
-        console.log(
-        "🚀 ~ file: Panorama.jsx:40 ~ initializePANOLENS ~ panorama1:",
-        panorama1
-        );
-        const panorama2 = new PANOLENS.ImagePanorama("/assets/p2.jpg");
-        const panorama3 = new PANOLENS.ImagePanorama("/assets/p3.jpg");
-        const panorama4 = new PANOLENS.ImagePanorama("/assets/p4.jpg");
-        const panorama5 = new PANOLENS.ImagePanorama("/assets/p5.jpg");
-        const panorama6 = new PANOLENS.ImagePanorama("/assets/p6.jpg");
-        const panorama7 = new PANOLENS.ImagePanorama("/assets/p7.jpg");
-        const panorama8 = new PANOLENS.ImagePanorama("/assets/p8.jpg");
-        // viewer.add(panorama1, panorama2, panorama3);
-        viewer.add(
-        panorama1,
-        panorama2,
-        panorama3,
-        panorama4,
-        panorama5,
-        panorama6,
-        panorama7,
-        panorama8
-        );
+    const panorama1 = new PANOLENS.ImagePanorama("/assets/p1.jpg");
+    console.log(
+      "🚀 ~ file: Panorama.jsx:40 ~ initializePANOLENS ~ panorama1:",
+      panorama1
+    );
+    const panorama2 = new PANOLENS.ImagePanorama("/assets/p2.jpg");
+    const panorama3 = new PANOLENS.ImagePanorama("/assets/p3.jpg");
+    const panorama4 = new PANOLENS.ImagePanorama("/assets/p4.jpg");
+    const panorama5 = new PANOLENS.ImagePanorama("/assets/p5.jpg");
+    const panorama6 = new PANOLENS.ImagePanorama("/assets/p6.jpg");
+    const panorama7 = new PANOLENS.ImagePanorama("/assets/p7.jpg");
+    const panorama8 = new PANOLENS.ImagePanorama("/assets/p8.jpg");
+    // viewer.add(panorama1, panorama2, panorama3);
+    viewer.add(
+      panorama1,
+      panorama2,
+      panorama3,
+      panorama4,
+      panorama5,
+      panorama6,
+      panorama7,
+      panorama8
+    );
 
-        const hotspot1 = createInfospot("/assets/circle.png");
-        const hotspot2 = createInfospot("/assets/circle1.png");
-        const hotspot3 = createInfospot("/assets/ellipseVip.png");
-        const hotspot4 = createInfospot("/assets/circle2.png");
-        const hotspot5 = createInfospot("/assets/circle3.png");
-        const hotspot6 = createInfospot("/assets/circle4.png");
-        const hotspot7 = createInfospot("/assets/circle5.png");
-        // const hotspot8 = createInfospot("/assets/circle6.png");
+    const hotspot1 = createInfospot("/assets/circle.png");
+    const hotspot2 = createInfospot("/assets/circle1.png");
+    const hotspot3 = createInfospot("/assets/ellipseVip.png");
+    const hotspot4 = createInfospot("/assets/circle2.png");
+    const hotspot5 = createInfospot("/assets/circle3.png");
+    const hotspot6 = createInfospot("/assets/circle4.png");
+    const hotspot7 = createInfospot("/assets/circle5.png");
+    // const hotspot8 = createInfospot("/assets/circle6.png");
 
-        hotspot1.position.set(2000, -4000, 4000);
-        hotspot2.position.set(6000.0, 300.0, 3500.0);
-        hotspot3.position.set(8000, 3500, 5000);
-        hotspot4.position.set(9000.0, 500.0, 1000.0);
-        hotspot5.position.set(8000.0, 500.0, 1000.0);
-        hotspot6.position.set(10000.0, -500.0, 10.0);
-        hotspot7.position.set(10000.0, -500.0, 10.0);
-        // hotspot8.position.set(10000.0, -500.0, 10.0);
-        // popupHotspot1.position.set(1800.0, 500.0, 8000.0);
-        // popupHotspot2.position.set(1000.0, 500.0, 8000.0);
+    hotspot1.position.set(2000, -4000, 4000);
+    hotspot2.position.set(6000.0, 300.0, 3500.0);
+    hotspot3.position.set(8000, 3500, 5000);
+    hotspot4.position.set(9000.0, 500.0, 1000.0);
+    hotspot5.position.set(8000.0, 500.0, 1000.0);
+    hotspot6.position.set(10000.0, -500.0, 10.0);
+    hotspot7.position.set(10000.0, -500.0, 10.0);
+    // hotspot8.position.set(10000.0, -500.0, 10.0);
+    // popupHotspot1.position.set(1800.0, 500.0, 8000.0);
+    // popupHotspot2.position.set(1000.0, 500.0, 8000.0);
 
-        panorama1.add(hotspot1);
-        // panorama1.add(hotspot1);
-        panorama2.add(hotspot2);
-        panorama3.add(hotspot3);
-        panorama4.add(hotspot4);
-        panorama5.add(hotspot5);
-        panorama6.add(hotspot6);
-        panorama7.add(hotspot7);
-        // panorama8.add(hotspot8);
+    panorama1.add(hotspot1);
+    // panorama1.add(hotspot1);
+    panorama2.add(hotspot2);
+    panorama3.add(hotspot3);
+    panorama4.add(hotspot4);
+    panorama5.add(hotspot5);
+    panorama6.add(hotspot6);
+    panorama7.add(hotspot7);
+    // panorama8.add(hotspot8);
 
-        hotspot1.addEventListener("click", () => {
-        viewer.setPanorama(panorama2);
-        // setAudio(false);
-        });
-        hotspot2.addEventListener("click", () => {
-        viewer.setPanorama(panorama3);
-        // setAudio(true);
-        });
-        hotspot3.addEventListener("click", () => {
-        viewer.setPanorama(panorama4);
-        // setAudio(true);
-        });
-        hotspot4.addEventListener("click", () => {
-        viewer.setPanorama(panorama5);
-        // setAudio(true);
-        });
-        hotspot5.addEventListener("click", () => {
-        viewer.setPanorama(panorama6);
-        // setAudio(true);
-        });
-        hotspot6.addEventListener("click", () => {
-        viewer.setPanorama(panorama7);
-        // setAudio(true);
-        });
-        hotspot7.addEventListener("click", () => {
-        viewer.setPanorama(panorama8);
-        // setAudio(true);
-        });
-        // popupHotspot1.addEventListener("click", () => {
-        //   setOpen(true);
-        //   setAudio(false);
-        // });
-        // popupHotspot2.addEventListener("click", () => {
-        //   setIsOpen(true);
-        //   setAudio(false);
-        // });
-        panorama2.addEventListener("enter-fade-start", () => {
-        viewer.getCamera().fov = 80;
-        viewer.getCamera().updateProjectionMatrix();
-        viewer.tweenControlCenter(new THREE.Vector3(5000.0, 50.0, 3000.9));
-        });
-        panorama1.addEventListener("enter-fade-start", () => {
-        viewer.getCamera().fov = 80;
-        viewer.getCamera().updateProjectionMatrix();
-        viewer.tweenControlCenter(new THREE.Vector3(5000.0, 50.0, 3000.9));
-        });
+    hotspot1.addEventListener("click", () => {
+      viewer.setPanorama(panorama2);
+    });
+    hotspot2.addEventListener("click", () => {
+      viewer.setPanorama(panorama3);
+      // setAudio(true);
+    });
+    hotspot3.addEventListener("click", () => {
+      viewer.setPanorama(panorama4);
+      // setAudio(true);
+    });
+    hotspot4.addEventListener("click", () => {
+      viewer.setPanorama(panorama5);
+      // setAudio(true);
+    });
+    hotspot5.addEventListener("click", () => {
+      viewer.setPanorama(panorama6);
+      // setAudio(true);
+    });
+    hotspot6.addEventListener("click", () => {
+      viewer.setPanorama(panorama7);
+      // setAudio(true);
+    });
+    hotspot7.addEventListener("click", () => {
+      viewer.setPanorama(panorama8);
+      // setAudio(true);
+    });
+    // popupHotspot1.addEventListener("click", () => {
+    //   setOpen(true);
+    //   setAudio(false);
+    // });
+    // popupHotspot2.addEventListener("click", () => {
+    //   setIsOpen(true);
+    //   setAudio(false);
+    // });
+    panorama2.addEventListener("enter-fade-start", () => {
+      viewer.getCamera().fov = 80;
+      viewer.getCamera().updateProjectionMatrix();
+      viewer.tweenControlCenter(new THREE.Vector3(5000.0, 50.0, 3000.9));
+    });
+    panorama1.addEventListener("enter-fade-start", () => {
+      viewer.getCamera().fov = 80;
+      viewer.getCamera().updateProjectionMatrix();
+      viewer.tweenControlCenter(new THREE.Vector3(5000.0, 50.0, 3000.9));
+    });
 
-        function createInfospot(imageUrl) {
-        const Infospot = new PANOLENS.Infospot(1000, imageUrl);
+    function createInfospot(imageUrl) {
+      const Infospot = new PANOLENS.Infospot(1000, imageUrl);
 
-        Infospot.animated = true;
+      Infospot.animated = true;
 
-        return Infospot;
-        }
-    };
-    const onClose = () => {
-        setOpen(false);
-        setAudio(true);
-    };
-
-    useEffect(() => {
-        if (typeof window !== "undefined") {
-        initializePANOLENS();
-        }
-    }, []);
-    useEffect(() => {
-        const handleResize = () => {
-        const isPortrait = window.innerHeight > window.innerWidth;
-        console.log(
-            "🚀 ~ file: panorama.jsx:115 ~ handleResize ~ window.innerWidth:",
-            window.innerWidth
-        );
-        console.log(
-            "🚀 ~ file: panorama.jsx:115 ~ handleResize ~ window.innerHeight:",
-            window.innerHeight
-        );
-        setShowCanvas(isPortrait);
-        };
-
-        // Attach event listener for window resize
-        window.addEventListener("resize", handleResize);
-
-        // Call the initial handleResize to set the initial value
-        handleResize();
-
-        // Clean up the event listener on component unmount
-        return () => {
-        window.removeEventListener("resize", handleResize);
-        };
-    }, []);
-
-    const handlePermissionRequest = () => {
-        if (
-        typeof DeviceMotionEvent !== "undefined" &&
-        typeof DeviceMotionEvent.requestPermission === "function"
-        ) {
-        DeviceMotionEvent.requestPermission()
-            .then((permissionState) => {
-            if (permissionState === "granted") {
-                // Permission granted
-                console.log("Gyroscope access granted");
-                // setAudioPlaying(true);
-                // Enable the DeviceOrientationControls here or perform other actions
-            } else {
-                // Permission denied
-                console.log("Gyroscope access denied");
-                // Handle the denial case
-            }
-            })
-            .catch((error) => {
-            console.error("Error requesting gyroscope permission:", error);
-            });
-        }
-    };
-    function click() {
-        setHide(false);
-        handlePermissionRequest();
+      return Infospot;
     }
-    return (
-      <>
-        {hide && (
-          <div
-            onClick={click}
-            className="h-screen absolute z-50 w-full bg-black lg:hidden flex justify-center items-center"
-          >
-            <h1 className="text-white text-center">Click Me</h1>
-          </div>
-        )}
-        <div
-          className={`flex justify-center items-center h-screen  ${
-            !showCanvas ? "hidden" : "block"
-          }`}
-        >
-          <img src="/download.png" alt="Canvas" />
-        </div>
-        <div
-          ref={Canvas}
-          className={`w-full h-[100vh] overflow-hidden opacity-100 bg-transparent ${
-            showCanvas ? "hidden" : "flex"
-          }`}
-        ></div>
+  };
+  const onClose = () => {
+    setOpen(false);
+    setAudio(true);
+  };
 
-        {/* {audio && ( */}
-        {/* <audio
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      initializePANOLENS();
+    }
+  }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      const isPortrait = window.innerHeight > window.innerWidth;
+      if (isPortrait) {
+        setAudio(false);
+      } else {
+        setAudio(true);
+      }
+      console.log(
+        "🚀 ~ file: Panorama.jsx:164 ~ handleResize ~ isPortrait:",
+        isPortrait
+      );
+      console.log(
+        "🚀 ~ file: panorama.jsx:115 ~ handleResize ~ window.innerWidth:",
+        window.innerWidth
+      );
+      console.log(
+        "🚀 ~ file: panorama.jsx:115 ~ handleResize ~ window.innerHeight:",
+        window.innerHeight
+      );
+      setShowCanvas(isPortrait);
+    };
+
+    // Attach event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Call the initial handleResize to set the initial value
+    handleResize();
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const handlePermissionRequest = () => {
+    if (
+      typeof DeviceMotionEvent !== "undefined" &&
+      typeof DeviceMotionEvent.requestPermission === "function"
+    ) {
+      DeviceMotionEvent.requestPermission()
+        .then((permissionState) => {
+          if (permissionState === "granted") {
+            // Permission granted
+            console.log("Gyroscope access granted");
+            // setAudioPlaying(true);
+            // Enable the DeviceOrientationControls here or perform other actions
+          } else {
+            // Permission denied
+            console.log("Gyroscope access denied");
+            // Handle the denial case
+          }
+        })
+        .catch((error) => {
+          console.error("Error requesting gyroscope permission:", error);
+        });
+    }
+  };
+  function click() {
+    setHide(false);
+    setAudio(true);
+
+    handlePermissionRequest();
+  }
+  return (
+    <>
+      {hide && (
+        <div
+          onClick={click}
+          className="h-screen absolute z-50 w-full bg-black lg:hidden flex justify-center items-center"
+        >
+          <h1 className="text-white text-center">Click Me</h1>
+        </div>
+      )}
+      <div
+        className={`flex justify-center items-center h-screen  ${
+          !showCanvas ? "hidden" : "block"
+        }`}
+      >
+        <img src="/download.png" alt="Canvas" />
+      </div>
+      <div
+        ref={Canvas}
+        className={`w-full h-[100vh] overflow-hidden opacity-100 bg-transparent ${
+          showCanvas ? "hidden" : "flex"
+        }`}
+      >
+        {audio && (
+          <audio
             src="/audio.mp3"
             //   className="w-0 h-0"
             autoPlay
-            ></audio> */}
-        {/* {audioPlaying && ( */}
-        <ReactAudioPlayer src="/audio.mp3" autoPlay loop/>
-        {/* )} */}
-        {/* )} */}
-        {/* {open && (
+            loop
+          ></audio>
+        )}
+      </div>
+
+      {/* {audioPlaying && ( */}
+      {/* <ReactAudioPlayer src="/audio.mp3" autoPlay loop/> */}
+      {/* )} */}
+      {/* )} */}
+      {/* {open && (
             <div className="fixed inset-0 flex items-center justify-center z-10">
             <div className="bg-white rounded-lg p-8 lg:w-[50%] ">
                 <div className="flex justify-between mb-4">
@@ -290,8 +303,8 @@ import ReactAudioPlayer from "react-audio-player";
             </div>
             </div>
         )} */}
-        {/* <VideoPopup open={open} setOpen={setOpen} /> */}
-        {/* {isOpen && (
+      {/* <VideoPopup open={open} setOpen={setOpen} /> */}
+      {/* {isOpen && (
             <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white  rounded-lg relative lg:w-[50%]">
                 <button
@@ -326,6 +339,6 @@ import ReactAudioPlayer from "react-audio-player";
             </div>
             </div>
         )} */}
-      </>
-    );
-    };
+    </>
+  );
+};
