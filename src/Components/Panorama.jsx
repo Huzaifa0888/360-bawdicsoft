@@ -30,12 +30,7 @@ export const Panorama = ({}) => {
       "🚀 ~ file: Panorama.jsx:29 ~ initializePANOLENS ~ viewer:",
       viewer
     );
-    viewer.control = viewer.DeviceOrientationControls;
-    viewer.OrbitControls.enabled = false;
-    // viewer.control[1] = true;
-    viewer.controls[1] = true;
-    viewer.controls[0] = false;
-    viewer.DeviceOrientationControls.enabled = true;
+  
 
     const panorama1 = new PANOLENS.ImagePanorama("/assets/p1.jpg");
     console.log(
@@ -62,7 +57,19 @@ export const Panorama = ({}) => {
     //   panorama7,
     //   panorama8
     );
+function isMobileDevice() {
+  return window.matchMedia("(max-width: 767px)").matches;
+}
 
+// Usage:
+if (isMobileDevice()) {
+  viewer.control = viewer.DeviceOrientationControls;
+  viewer.OrbitControls.enabled = false;
+  // viewer.control[1] = true;
+  viewer.controls[1] = true;
+  viewer.controls[0] = false;
+  viewer.DeviceOrientationControls.enabled = true;
+}
     const hotspot1 = createInfospot("/assets/circle.png");
     const hotspot2 = createInfospot("/assets/circle1.png");
     const hotspot3 = createInfospot("/assets/ellipseVip.png");
@@ -217,7 +224,7 @@ export const Panorama = ({}) => {
   };
   function click() {
     setHide(false);
-    // setAudio(true);
+    setAudio(true);
 
     handlePermissionRequest();
   }
@@ -226,7 +233,7 @@ export const Panorama = ({}) => {
       {hide && (
         <div
           onClick={click}
-          className="h-screen absolute z-50 w-full bg-black lg:hidden flex justify-center items-center"
+          className="h-screen absolute z-50 w-full bg-black flex justify-center items-center"
         >
           <h1 className="text-white text-center">Click Me</h1>
         </div>
@@ -244,6 +251,7 @@ export const Panorama = ({}) => {
           showCanvas ? "hidden" : "flex"
         }`}
       >
+      </div>
         {audio && (
           <audio
             src="/audio.mp3"
@@ -252,7 +260,6 @@ export const Panorama = ({}) => {
             loop
           ></audio>
         )}
-      </div>
 
       {/* {audioPlaying && ( */}
       {/* <ReactAudioPlayer src="/audio.mp3" autoPlay loop/> */}
