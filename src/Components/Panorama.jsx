@@ -243,7 +243,7 @@ if (isMobileDevice()) {
           !showCanvas ? "hidden" : "block"
         }`}
       >
-        <img src="/download.png" alt="Canvas" className="w-full h-full"/>
+        <img src="/download.png" alt="Canvas" className="w-full h-full" />
       </div>
       <div
         ref={Canvas}
