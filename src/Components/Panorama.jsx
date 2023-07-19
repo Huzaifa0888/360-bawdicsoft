@@ -62,14 +62,18 @@ function isMobileDevice() {
 }
 
 // Usage:
-if (isMobileDevice()) {
-  viewer.control = viewer.DeviceOrientationControls;
-  viewer.OrbitControls.enabled = false;
-  // viewer.control[1] = true;
-  viewer.controls[1] = true;
-  viewer.controls[0] = false;
-  viewer.DeviceOrientationControls.enabled = true;
-}
+// if (isMobileDevice()) {
+//   viewer.control = viewer.DeviceOrientationControls;
+//   viewer.OrbitControls.enabled = false;
+//   // viewer.control[1] = true;
+//   viewer.controls[1] = true;
+//   viewer.controls[0] = false;
+//   viewer.DeviceOrientationControls.enabled = true;
+//   setAudio(true)
+// }else{
+//   setAudio(true);
+
+// }
     const hotspot1 = createInfospot("/assets/circle.png");
     const hotspot2 = createInfospot("/assets/circle1.png");
     const hotspot3 = createInfospot("/assets/ellipseVip.png");
@@ -251,7 +255,6 @@ if (isMobileDevice()) {
           showCanvas ? "hidden" : "flex"
         }`}
       >
-      </div>
         {audio && (
           <audio
             src="/audio.mp3"
@@ -260,6 +263,7 @@ if (isMobileDevice()) {
             loop
           ></audio>
         )}
+      </div>
 
       {/* {audioPlaying && ( */}
       {/* <ReactAudioPlayer src="/audio.mp3" autoPlay loop/> */}
