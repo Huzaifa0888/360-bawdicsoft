@@ -51,7 +51,7 @@ export const Panorama = ({}) => {
     // const panorama8 = new PANOLENS.ImagePanorama("/assets/p8.jpg");
     // viewer.add(panorama1, panorama2, panorama3);
     viewer.add(
-      panorama6,
+      panorama1,
       panorama2,
       panorama3,
       panorama4,
