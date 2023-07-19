@@ -251,6 +251,7 @@ if (isMobileDevice()) {
           showCanvas ? "hidden" : "flex"
         }`}
       >
+      </div>
         {audio && (
           <audio
             src="/audio.mp3"
@@ -259,7 +260,6 @@ if (isMobileDevice()) {
             loop
           ></audio>
         )}
-      </div>
 
       {/* {audioPlaying && ( */}
       {/* <ReactAudioPlayer src="/audio.mp3" autoPlay loop/> */}
