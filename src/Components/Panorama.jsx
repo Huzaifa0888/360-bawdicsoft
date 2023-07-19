@@ -228,9 +228,9 @@ function isMobileDevice() {
   };
   function click() {
     setHide(false);
+    handlePermissionRequest();
     setAudio(true);
 
-    handlePermissionRequest();
   }
   return (
     <>
