@@ -1,10 +1,8 @@
 "use client";
 
-import { useMemo, useRef, useState, useEffect } from "react";
+import {useRef, useState, useEffect} from "react";
 
-// import VideoPopup from "./VideoPopup";
-import ReactAudioPlayer from "react-audio-player";
-// import ReactPlayer from "react-player";
+
 
 export const Panorama = ({}) => {
   const Canvas = useRef(null);
@@ -13,8 +11,7 @@ export const Panorama = ({}) => {
   const [audio, setAudio] = useState(false);
   const [hide, setHide] = useState(true);
   const [showCanvas, setShowCanvas] = useState(false);
-  const audioRef = useRef(null);
-  const [audioPlaying, setAudioPlaying] = useState(false);
+
 
   const initializePANOLENS = async () => {
     const THREE = await import("three");
@@ -33,12 +30,12 @@ export const Panorama = ({}) => {
       "🚀 ~ file: Panorama.jsx:29 ~ initializePANOLENS ~ viewer:",
       viewer
     );
-    // viewer.control = viewer.DeviceOrientationControls;
-    // viewer.OrbitControls.enabled = false;
-    // // viewer.control[1] = true;
-    // viewer.controls[1] = true;
-    // viewer.controls[0] = false;
-    // viewer.DeviceOrientationControls.enabled = true;
+    viewer.control = viewer.DeviceOrientationControls;
+    viewer.OrbitControls.enabled = false;
+    // viewer.control[1] = true;
+    viewer.controls[1] = true;
+    viewer.controls[0] = false;
+    viewer.DeviceOrientationControls.enabled = true;
 
     const panorama1 = new PANOLENS.ImagePanorama("/assets/p1.jpg");
     console.log(
@@ -50,18 +47,18 @@ export const Panorama = ({}) => {
     const panorama4 = new PANOLENS.ImagePanorama("/assets/p4.jpg");
     const panorama5 = new PANOLENS.ImagePanorama("/assets/p5.jpg");
     const panorama6 = new PANOLENS.ImagePanorama("/assets/p6.jpg");
-    const panorama7 = new PANOLENS.ImagePanorama("/assets/p7.jpg");
-    const panorama8 = new PANOLENS.ImagePanorama("/assets/p8.jpg");
+    // const panorama7 = new PANOLENS.ImagePanorama("/assets/p7.jpg");
+    // const panorama8 = new PANOLENS.ImagePanorama("/assets/p8.jpg");
     // viewer.add(panorama1, panorama2, panorama3);
     viewer.add(
-      panorama1,
+      panorama6,
       panorama2,
       panorama3,
       panorama4,
       panorama5,
-      panorama6,
-      panorama7,
-      panorama8
+      panorama6
+    //   panorama7,
+    //   panorama8
     );
 
     const hotspot1 = createInfospot("/assets/circle.png");
@@ -69,8 +66,8 @@ export const Panorama = ({}) => {
     const hotspot3 = createInfospot("/assets/ellipseVip.png");
     const hotspot4 = createInfospot("/assets/circle2.png");
     const hotspot5 = createInfospot("/assets/circle3.png");
-    const hotspot6 = createInfospot("/assets/circle4.png");
-    const hotspot7 = createInfospot("/assets/circle5.png");
+    // const hotspot6 = createInfospot("/assets/circle4.png");
+    // const hotspot7 = createInfospot("/assets/circle5.png");
     // const hotspot8 = createInfospot("/assets/circle6.png");
 
     hotspot1.position.set(2000, -4000, 4000);
@@ -78,8 +75,8 @@ export const Panorama = ({}) => {
     hotspot3.position.set(8000, 3500, 5000);
     hotspot4.position.set(9000.0, 500.0, 1000.0);
     hotspot5.position.set(8000.0, 500.0, 1000.0);
-    hotspot6.position.set(10000.0, -500.0, 10.0);
-    hotspot7.position.set(10000.0, -500.0, 10.0);
+    // hotspot6.position.set(10000.0, -500.0, 10.0);
+    // hotspot7.position.set(10000.0, -500.0, 10.0);
     // hotspot8.position.set(10000.0, -500.0, 10.0);
     // popupHotspot1.position.set(1800.0, 500.0, 8000.0);
     // popupHotspot2.position.set(1000.0, 500.0, 8000.0);
@@ -90,8 +87,8 @@ export const Panorama = ({}) => {
     panorama3.add(hotspot3);
     panorama4.add(hotspot4);
     panorama5.add(hotspot5);
-    panorama6.add(hotspot6);
-    panorama7.add(hotspot7);
+    // panorama6.add(hotspot6);
+    // panorama7.add(hotspot7);
     // panorama8.add(hotspot8);
 
     hotspot1.addEventListener("click", () => {
@@ -113,14 +110,14 @@ export const Panorama = ({}) => {
       viewer.setPanorama(panorama6);
       // setAudio(true);
     });
-    hotspot6.addEventListener("click", () => {
-      viewer.setPanorama(panorama7);
-      // setAudio(true);
-    });
-    hotspot7.addEventListener("click", () => {
-      viewer.setPanorama(panorama8);
-      // setAudio(true);
-    });
+    // hotspot6.addEventListener("click", () => {
+    //   viewer.setPanorama(panorama7);
+    //   // setAudio(true);
+    // });
+    // hotspot7.addEventListener("click", () => {
+    //   viewer.setPanorama(panorama8);
+    //   // setAudio(true);
+    // });
     // popupHotspot1.addEventListener("click", () => {
     //   setOpen(true);
     //   setAudio(false);
