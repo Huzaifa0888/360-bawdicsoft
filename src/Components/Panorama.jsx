@@ -61,19 +61,15 @@ function isMobileDevice() {
   return window.matchMedia("(max-width: 767px)").matches;
 }
 
-// Usage:
-// if (isMobileDevice()) {
-//   viewer.control = viewer.DeviceOrientationControls;
-//   viewer.OrbitControls.enabled = false;
-//   // viewer.control[1] = true;
-//   viewer.controls[1] = true;
-//   viewer.controls[0] = false;
-//   viewer.DeviceOrientationControls.enabled = true;
-//   setAudio(true)
-// }else{
-//   setAudio(true);
-
-// }
+Usage:
+if (isMobileDevice()) {
+  viewer.control = viewer.DeviceOrientationControls;
+  viewer.OrbitControls.enabled = false;
+  // viewer.control[1] = true;
+  viewer.controls[1] = true;
+  viewer.controls[0] = false;
+  viewer.DeviceOrientationControls.enabled = true;
+}
     const hotspot1 = createInfospot("/assets/circle.png");
     const hotspot2 = createInfospot("/assets/circle1.png");
     const hotspot3 = createInfospot("/assets/ellipseVip.png");
