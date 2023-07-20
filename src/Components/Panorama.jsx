@@ -167,11 +167,11 @@ if (isMobileDevice()) {
   useEffect(() => {
     const handleResize = () => {
       const isPortrait = window.innerHeight > window.innerWidth;
-      if (isPortrait) {
-        setAudio(false);
-      } else {
-        setAudio(true);
-      }
+      // if (isPortrait) {
+      //   setAudio(false);
+      // } else {
+      //   setAudio(true);
+      // }
       console.log(
         "🚀 ~ file: Panorama.jsx:164 ~ handleResize ~ isPortrait:",
         isPortrait
@@ -198,6 +198,17 @@ if (isMobileDevice()) {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  useEffect(() => {
+    // Start playing the audio when the component mounts
+    if (audio) {
+      const audioElement = new Audio("/audio.mp3");
+      audioElement.loop = true;
+      audioElement.play().catch((error) => {
+        console.error("Error playing audio:", error);
+        setAudio(false);
+      });
+    }
+  }, [audio]);
 
   const handlePermissionRequest = () => {
     if (
