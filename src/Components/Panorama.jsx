@@ -199,24 +199,22 @@ if (isMobileDevice()) {
     };
   }, []);
 useEffect(() => {
-  // Initialize the audio element only once
-  const audioElement = new Audio("/audio.mp3");
-  audioElement.loop = true;
-
-  // Update the audio element's playback status based on the state
-  if (audio) {
+  // Start playing the audio when the component mounts and audio is true
+  if (audio && !audioElementRef.current) {
+    const audioElement = new Audio("/audio.mp3");
+    audioElement.loop = true;
     audioElement.play().catch((error) => {
       console.error("Error playing audio:", error);
       setAudio(false);
     });
-  } else {
-    audioElement.pause();
-  }
 
-  // Clean up the audio element when the component unmounts
-  return () => {
-    audioElement.pause();
-  };
+    // Store the audio element in the ref
+    audioElementRef.current = audioElement;
+  } else if (!audio && audioElementRef.current) {
+    // Pause and clean up the audio element when audio becomes false
+    audioElementRef.current.pause();
+    audioElementRef.current = null;
+  }
 }, [audio]);
 
   const handlePermissionRequest = () => {
