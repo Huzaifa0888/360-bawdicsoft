@@ -58,7 +58,7 @@ export const Panorama = ({}) => {
     //   panorama8
     );
 function isMobileDevice() {
-  return window.matchMedia("(max-width: 767px)").matches;
+  return window.matchMedia("(max-width: 1000px)").matches;
 }
 
 Usage:
