@@ -12,7 +12,7 @@ export const Panorama = ({}) => {
   const [hide, setHide] = useState(true);
   const [showCanvas, setShowCanvas] = useState(false);
 
-
+  const audioElementRef = useRef(null);
   const initializePANOLENS = async () => {
     const THREE = await import("three");
     const PANOLENS = await import("panolens");
@@ -143,7 +143,7 @@ if (isMobileDevice()) {
     panorama1.addEventListener("enter-fade-start", () => {
       viewer.getCamera().fov = 80;
       viewer.getCamera().updateProjectionMatrix();
-      viewer.tweenControlCenter(new THREE.Vector3(5000.0, 50.0, 3000.9));
+      viewer.tweenControlCenter(new THREE.Vector3(100, -400, 0));
     });
 
     function createInfospot(imageUrl) {
@@ -167,11 +167,11 @@ if (isMobileDevice()) {
   useEffect(() => {
     const handleResize = () => {
       const isPortrait = window.innerHeight > window.innerWidth;
-      // if (isPortrait) {
-      //   setAudio(false);
-      // } else {
-      //   setAudio(true);
-      // }
+      if (isPortrait) {
+        setAudio(false);
+      } else {
+        setAudio(true);
+      }
       console.log(
         "🚀 ~ file: Panorama.jsx:164 ~ handleResize ~ isPortrait:",
         isPortrait
@@ -198,17 +198,26 @@ if (isMobileDevice()) {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  useEffect(() => {
-    // Start playing the audio when the component mounts
-    if (audio) {
-      const audioElement = new Audio("/audio.mp3");
-      audioElement.loop = true;
-      audioElement.play().catch((error) => {
-        console.error("Error playing audio:", error);
-        setAudio(false);
-      });
-    }
-  }, [audio]);
+useEffect(() => {
+  // Initialize the audio element only once
+  const audioElement = new Audio("/audio.mp3");
+  audioElement.loop = true;
+
+  // Update the audio element's playback status based on the state
+  if (audio) {
+    audioElement.play().catch((error) => {
+      console.error("Error playing audio:", error);
+      setAudio(false);
+    });
+  } else {
+    audioElement.pause();
+  }
+
+  // Clean up the audio element when the component unmounts
+  return () => {
+    audioElement.pause();
+  };
+}, [audio]);
 
   const handlePermissionRequest = () => {
     if (
